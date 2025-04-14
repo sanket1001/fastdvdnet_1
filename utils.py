@@ -10,7 +10,7 @@ from random import choices # requires Python >= 3.6
 import numpy as np
 import cv2
 import torch
-from skimage.measure.simple_metrics import compare_psnr
+from skimage.metrics import peak_signal_noise_ratio
 from tensorboardX import SummaryWriter
 
 IMAGETYPES = ('*.bmp', '*.png', '*.jpg', '*.jpeg', '*.tif') # Supported image types
@@ -191,8 +191,8 @@ def batch_psnr(img, imclean, data_range):
 	imgclean = imclean.data.cpu().numpy().astype(np.float32)
 	psnr = 0
 	for i in range(img_cpu.shape[0]):
-		psnr += compare_psnr(imgclean[i, :, :, :], img_cpu[i, :, :, :], \
-					   data_range=data_range)
+		psnr += peak_signal_noise_ratio(imgclean[i, :, :, :], img_cpu[i, :, :, :], data_range=data_range)
+		
 	return psnr/img_cpu.shape[0]
 
 def variable_to_cv2_image(invar, conv_rgb_to_bgr=True):
