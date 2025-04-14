@@ -28,10 +28,10 @@ def save_out_seq(seqnoisy, seqclean, save_dir, sigmaval, suffix, save_noisy):
 						('n{}_{}').format(sigmaval, idx) + fext)
 		if len(suffix) == 0:
 			out_name = os.path.join(save_dir,\
-					('n{}_FastDVDnet_{}').format(sigmaval, idx) + fext)
+					('n{}_FastDVDnet_{:04d}').format(sigmaval, idx) + fext)
 		else:
 			out_name = os.path.join(save_dir,\
-					('n{}_FastDVDnet_{}_{}').format(sigmaval, suffix, idx) + fext)
+					('n{}_FastDVDnet_{}_{:04d}').format(sigmaval, suffix, idx) + fext)
 
 		# Save result
 		if save_noisy:
